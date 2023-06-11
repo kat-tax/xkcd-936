@@ -1,6 +1,6 @@
 # XKCD-936
 
-> A password generator that uses the XKCD-936 spec
+> A passphrase generator that uses the XKCD-936 spec
 
 ```ts
 import generate from 'xkcd-936';
