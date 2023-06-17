@@ -5,7 +5,4 @@ export interface Options {
   seed?: string | number,
 }
 
-export type WordList = 
-    'small'
-  | 'medium'
-  | 'large';
+export type WordList = 'small' | 'medium' | 'large';

@@ -1,7 +1,7 @@
 import {describe, expect, it, vi} from 'vitest';
-import {prng} from './alea';
+import alea from '../src/alea';
 
-describe('test suite', () => {
+describe('Alea', () => {
   const SEED = {
     number: 123,
     string: 'hello',
@@ -15,33 +15,33 @@ describe('test suite', () => {
   ];
 
   it('returns a function', () => {
-    const instance = vi.fn(prng);
+    const instance = vi.fn(alea);
     expect(instance).toBeTypeOf('function');
   });
 
   it('runs without the seed', () => {
-    const instance = vi.fn(prng);
+    const instance = vi.fn(alea);
     instance();
     expect(instance).toHaveBeenCalled();
   });
 
   it('accepts seed as number', () => {
-    const instance = vi.fn(prng);
+    const instance = vi.fn(alea);
     const {value} = instance(SEED.number).next();
     expect(instance).toHaveBeenCalled();
     expect(value).toBe(0.4801303152926266);
   });
 
   it('accepts seed argument as string', () => {
-    const instance = vi.fn(prng);
+    const instance = vi.fn(alea);
     const {value} = instance(SEED.string).next();
     expect(instance).toHaveBeenCalled();
     expect(value).toBe(0.8750656815245748);
   });
 
   it('returns same result if seed is identical', () => {
-    const instanceOne = vi.fn(prng);
-    const instanceTwo = vi.fn(prng);
+    const instanceOne = vi.fn(alea);
+    const instanceTwo = vi.fn(alea);
     const [{value: valueOne}, {value: valueTwo}] = [
       instanceOne(SEED.number).next(),
       instanceTwo(SEED.number).next(),
@@ -50,8 +50,8 @@ describe('test suite', () => {
   });
 
   it('returns different result if seed is not identical', () => {
-    const instanceOne = vi.fn(prng);
-    const instanceTwo = vi.fn(prng);
+    const instanceOne = vi.fn(alea);
+    const instanceTwo = vi.fn(alea);
     const [{value: valueOne}, {value: valueTwo}] = [
       instanceOne(SEED.number).next(),
       instanceTwo(SEED.string).next(),
@@ -60,19 +60,19 @@ describe('test suite', () => {
   });
 
   it('returns a result as uint32 if second argument is given', () => {
-    const instance = vi.fn(prng);
+    const instance = vi.fn(alea);
     const {value} = instance(SEED.number, 'uint32').next();
     expect(value).toBe(2062144002);
   });
 
   it('returns a result as fract53 if second argument is given', () => {
-    const instance = vi.fn(prng);
+    const instance = vi.fn(alea);
     const { value } = instance(SEED.number, 'fract53').next();
     expect(value).toBe(0.48013031540441564);
   });
 
   it('generates different outputs if looped through a single instance', () => {
-    const instance = vi.fn(prng);
+    const instance = vi.fn(alea);
     const generator = instance(SEED.number);
     let output: (number | void)[] = [];
     for (let i = 0; i < 10; i++)

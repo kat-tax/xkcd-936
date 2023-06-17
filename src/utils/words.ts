@@ -8,10 +8,14 @@ export function getWords(list: WordList, wordCount: number, seed?: string | numb
   const values = seed
     ? getPsuedoRandomValues(array, seed)
     : getCryptoRandomValues(array);
-  return Array.from(values).map(index => words[index % list.length]);
+  return getWord(words, values);
 }
 
-export function getList(name: WordList) {
+function getWord(words: string[], values: Uint16Array) {
+  return Array.from(values).map(i => words[i % words.length]);
+}
+
+function getList(name: WordList) {
   switch (name) {
     case 'small': return small;
     case 'medium': return medium;

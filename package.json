@@ -1,28 +1,33 @@
 {
-  "version": "1.0.3",
+  "version": "1.0.4",
   "name": "xkcd-936",
-  "main": "./dist/xkcd-936.cjs",
+  "files": [
+    "dist"
+  ],
   "module": "./dist/xkcd-936.mjs",
+  "main": "./dist/xkcd-936.cjs",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "require": "./dist/xkcd-936.cjs",
-      "import": "./dist/xkcd-936.mjs"
+      "import": "./dist/xkcd-936.mjs",
+      "require": "./dist/xkcd-936.cjs"
     }
   },
   "scripts": {
-    "start": "concurrently npm:vite npm:test",
+    "dev": "concurrently npm:vite npm:test",
     "build": "tsc && vitest run && vite build",
     "vite": "vite build --watch",
-    "test": "vitest watch"
+    "test": "vitest watch",
+    "test:ui": "vitest --ui"
   },
   "devDependencies": {
     "@types/node": "^20.3.0",
+    "@vitest/ui": "^0.32.0",
     "concurrently": "^8.2.0",
     "typescript": "^5.1.3",
     "vite": "^4.3.9",
     "vite-plugin-dts": "^2.3.0",
-    "vitest": "^0.29.8"
+    "vitest": "^0.32.0"
   },
   "keywords": [
     "xkcd",
